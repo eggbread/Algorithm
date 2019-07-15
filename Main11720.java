@@ -21,5 +21,4 @@ public class Main11720 {
 			System.out.println(sum);
 		
 	}
-
 }
