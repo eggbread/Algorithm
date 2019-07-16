@@ -1,38 +1,47 @@
 package algorithm;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main14716 {
+	static boolean[][] checkArr;
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int m = scan.nextInt();
-		int n = scan.nextInt();
-		int[][] arr = new int[m][n];
- 		for(int i=0;i<m;i++) {
-			for(int j=0;j<n;j++) {
-				
-				arr[i][j]=scan.nextInt();
-			}
-		}
- 		int count=0;
- 		boolean mod = false;
- 		for(int i=0;i<n;i++) {
- 			boolean check=false;
-			for(int j=0;j<m;j++) {
-				if(arr[j][i]==1) {
-					check = true;
-					mod = true;
-					break;
-				}
-			}
-			if(!check) {
-				if(mod) {
-					count++;
-					mod=false;
-				}
-			}
-		}
- 		System.out.println(count);
+		int m = scan.nextInt(),n = scan.nextInt();
+		checkArr = new boolean[m+2][n+2];
+ 		for(int i=1;i<=m;i++) 
+			for(int j=1;j<=n;j++) 
+				if(scan.nextInt()==1) 
+					checkArr[i][j]=true;
+ 		int count = 0;
+ 		for(int i=1;i<=m;i++) 
+			for(int j=1;j<=n;j++) 
+				count += find(i,j);
+
+ 		System.out.println(count);	
+	}
+	public static int find(int m, int n) {
+		int found =0;
+		if(checkArr[m][n]) {
+			checkArr[m][n] = false;			
+			found=1;
+		}else 
+			return 0;
+		if (checkArr[m][n + 1])//모조리 검색
+			find(m,n+1);
+		if (checkArr[m + 1][n + 1]) 
+			find(m+1,n+1);
+		if (checkArr[m + 1][n]) 
+			find(m+1,n);
+		if (checkArr[m + 1][n - 1]) 
+			find(m+1,n-1);
+		if (checkArr[m][n - 1]) 
+			find(m,n-1);
+		if (checkArr[m - 1][n - 1]) 
+			find(m-1,n-1);
+		if (checkArr[m - 1][n]) 
+			find(m-1,n);
+		if (checkArr[m - 1][n + 1]) 
+			find(m-1,n+1);
+		return found;
 	}
 }
