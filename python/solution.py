@@ -15,6 +15,7 @@ def solution_64061(board, moves):
     """
     프로그래머스 : 크레인 인형뽑기 게임
     Θ(n^2)
+    Stack 사용 문제
     """
     answer = 0
     result = list()
@@ -44,6 +45,7 @@ def solution_42587(priorities, location):
     """
     프로그래머스 : 프린터
     Θ(n)
+    Queue 사용 문제
     """
     answer = 0
     while True:
@@ -67,7 +69,36 @@ def solution_42587(priorities, location):
                 priorities.append(value)
     return answer
 
+def solution(N, number):
+    """
+    프로그래머스 : N으로 표현
+    Θ(?)
+    n번의 사용으로 만들어진 숫자는 1, n-1 ~ n-1, 1의 숫자들의 사칙연산의 조합이다.
+    """
+    sets = [set()]
+    answer = 9
+    for i in range(1,9):
+        sets.append(set())
+        sets[i].add(int(str(N) * i))
+    if number == N:
+        return 1
+    for i in range(2,8):
+        for j in range(1,i):
+            for a in sets[j]:
+                for b in sets[i-j]:
+                    sets[i].add(a + b)
+                    sets[i].add(a - b)
+                    sets[i].add(a * b)
+                    if b:
+                        sets[i].add(a // b)
+        if number in sets[i]:
+            if answer > i:
+                answer = i
+            break
+
+    if answer == 9:
+        return -1
+    else:
+        return answer
 if __name__ == '__main__':
-    board = [2, 2]
-    moves = 1
-    print(solution(board, moves))
+    print(solution(1, 1))
