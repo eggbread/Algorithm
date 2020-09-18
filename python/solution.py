@@ -69,7 +69,7 @@ def solution_42587(priorities, location):
                 priorities.append(value)
     return answer
 
-def solution(N, number):
+def solution_42895(N, number):
     """
     프로그래머스 : N으로 표현
     Θ(?)
@@ -100,5 +100,28 @@ def solution(N, number):
         return -1
     else:
         return answer
+
+def solution(n, computers):
+    """
+    프로그래머스 : 네트워크
+    Θ(n^2)
+    Stack을 이용한 DFS
+    """
+    answer = 0
+    check = [False for _ in range(n)]
+    for i, item in enumerate(check):
+        if not item:
+            stack = [i]
+            answer += 1
+            while stack:
+                idx = stack.pop()
+                check[idx] = True
+                for index, x in enumerate(computers[idx]):
+                    if not check[index] and x == 1 and idx != index:
+                        stack.append(index)
+    return answer
+
 if __name__ == '__main__':
-    print(solution(1, 1))
+    n = 5
+    computers = [[1, 1, 0, 0, 0], [1, 1, 0, 1, 1], [0, 0, 1, 0, 1], [0, 1, 0, 1, 0], [0, 1, 1, 0, 1]]
+    print(solution(n, computers))
