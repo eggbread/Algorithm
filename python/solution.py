@@ -101,7 +101,7 @@ def solution_42895(N, number):
     else:
         return answer
 
-def solution(n, computers):
+def solution_43162_1(n, computers):
     """
     프로그래머스 : 네트워크
     Θ(n^2)
@@ -120,6 +120,27 @@ def solution(n, computers):
                     if not check[index] and x == 1 and idx != index:
                         stack.append(index)
     return answer
+
+def solution_43162_2(n, computers):
+    """
+    프로그래머스 : 네트워크
+    Θ(n^2)
+    재귀를 이용한 DFS
+    """
+    answer = 0
+    check = [False for _ in range(n)]
+    for i, item in enumerate(check):
+        if not item:
+            answer += 1
+            DFS(computers, i, check)
+    return answer
+
+def DFS(computers, n, check):
+    check[n] = True
+    for i, x in enumerate(computers[n]):
+        if x == 1 and not check[i] and i != n:
+            DFS(computers, i, check)
+
 
 if __name__ == '__main__':
     n = 5
