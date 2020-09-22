@@ -1,4 +1,3 @@
-
 def solution_68644(numbers):
     answer = set()
     """
@@ -6,7 +5,7 @@ def solution_68644(numbers):
     Θ(n^2)
     """
     for i, x in enumerate(numbers):
-        for y in numbers[i+1:]:
+        for y in numbers[i + 1:]:
             answer.add(x + y)
     return sorted(answer)
 
@@ -22,7 +21,7 @@ def solution_64061(board, moves):
     for move in moves:
         dool = 0
         idx = 0
-        while board[idx][move-1] < 1 and idx < len(board) - 1:
+        while board[idx][move - 1] < 1 and idx < len(board) - 1:
             idx += 1
 
         if dool == 0:
@@ -40,6 +39,7 @@ def solution_64061(board, moves):
         else:
             result.append(dool)
     return answer * 2
+
 
 def solution_42587(priorities, location):
     """
@@ -69,6 +69,7 @@ def solution_42587(priorities, location):
                 priorities.append(value)
     return answer
 
+
 def solution_42895(N, number):
     """
     프로그래머스 : N으로 표현
@@ -77,15 +78,15 @@ def solution_42895(N, number):
     """
     sets = [set()]
     answer = 9
-    for i in range(1,9):
+    for i in range(1, 9):
         sets.append(set())
         sets[i].add(int(str(N) * i))
     if number == N:
         return 1
-    for i in range(2,8):
-        for j in range(1,i):
+    for i in range(2, 8):
+        for j in range(1, i):
             for a in sets[j]:
-                for b in sets[i-j]:
+                for b in sets[i - j]:
                     sets[i].add(a + b)
                     sets[i].add(a - b)
                     sets[i].add(a * b)
@@ -100,6 +101,7 @@ def solution_42895(N, number):
         return -1
     else:
         return answer
+
 
 def solution_43162_1(n, computers):
     """
@@ -121,6 +123,7 @@ def solution_43162_1(n, computers):
                         stack.append(index)
     return answer
 
+
 def solution_43162_2(n, computers):
     """
     프로그래머스 : 네트워크
@@ -135,6 +138,7 @@ def solution_43162_2(n, computers):
             DFS(computers, i, check)
     return answer
 
+
 def DFS(computers, n, check):
     check[n] = True
     for i, x in enumerate(computers[n]):
@@ -142,7 +146,29 @@ def DFS(computers, n, check):
             DFS(computers, i, check)
 
 
+def solution_43165(numbers, target):
+    """
+    프로그래머스 : 타겟 넘버
+    Θ(lgn)
+    Stack을 이용한 DFS
+    시간초과 때문에 Bottom-up이 아니라 Up-bottom으로 해야한다.
+    """
+    stack = [target + numbers[0], target - numbers[0]]
+    sums = sum(numbers) - numbers[0]
+    for i in numbers[1:]:
+        sums -= i
+        for _ in range(len(stack)):
+            num = stack.pop(0)
+            temp = num + i
+            if temp - sums <= 0:
+                stack.append(temp)
+            temp = num - i
+            if temp + sums >= 0:
+                stack.append(temp)
+
+    return stack.count(0)
+
 if __name__ == '__main__':
-    n = 5
-    computers = [[1, 1, 0, 0, 0], [1, 1, 0, 1, 1], [0, 0, 1, 0, 1], [0, 1, 0, 1, 0], [0, 1, 1, 0, 1]]
-    print(solution(n, computers))
+    numbers = [1, 1, 1, 1, 1]
+    target = 3
+    print(solution(numbers,target))
