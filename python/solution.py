@@ -168,7 +168,7 @@ def solution_43165(numbers, target):
 
     return stack.count(0)
 
-def solution(begin, target, words):
+def solution_43163(begin, target, words):
     """
     프로그래머스 : 단어 변환
     Θ(n^2)
@@ -200,8 +200,31 @@ def check_word(A, B):
     else:
         return False
 
+import itertools
+def solution(numbers):
+    """
+    프로그래머스 : 소수 찾기
+    O(n^2)
+    brute force로 다 돌며 찾기
+    """
+    answer = 0
+    for i in range(1,len(numbers)+1):
+        number_list = set(map(''.join, itertools.permutations(list(numbers), i)))
+        for item in number_list:
+            if item[0] != '0':
+                number = int(item)
+                if isPrime(number):
+                    answer += 1
+    return answer
+
+def isPrime(a):
+  if(a<2):
+    return False
+  for i in range(2,a):
+    if(a%i==0):
+      return False
+  return True
+
 if __name__ == '__main__':
-    begin = 'hit'
-    target = 'cog'
-    words = ['hot', 'dot', 'dog', 'lot', 'log', 'cog']
-    print(solution(begin, target, words))
+    numbers = "011"
+    print(solution(numbers))
