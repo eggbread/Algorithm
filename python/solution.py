@@ -150,7 +150,7 @@ def solution_43165(numbers, target):
     """
     프로그래머스 : 타겟 넘버
     Θ(lgn)
-    Stack을 이용한 DFS
+    Queue를 이용한 DFS
     시간초과 때문에 Bottom-up이 아니라 Up-bottom으로 해야한다.
     """
     stack = [target + numbers[0], target - numbers[0]]
@@ -168,7 +168,40 @@ def solution_43165(numbers, target):
 
     return stack.count(0)
 
+def solution(begin, target, words):
+    """
+    프로그래머스 : 단어 변환
+    Θ(n^2)
+    Stack을 이용한 DFS
+    """
+    answer = 0
+    if target not in words:
+        return 0
+    q = [begin]
+    found = [False for _ in range(len(words))]
+    while q:
+        word = q.pop()
+        if target == word:
+            return answer
+        for idx, item in enumerate(words):
+            if check_word(word, item) and not found[idx]:
+                found[idx] = True
+                q.append(item)
+        answer += 1
+    return 0
+
+def check_word(A, B):
+    cnt = 0
+    for i in range(len(A)):
+        if A[i] != B[i]:
+            cnt += 1
+    if cnt == 1:
+        return True
+    else:
+        return False
+
 if __name__ == '__main__':
-    numbers = [1, 1, 1, 1, 1]
-    target = 3
-    print(solution(numbers,target))
+    begin = 'hit'
+    target = 'cog'
+    words = ['hot', 'dot', 'dog', 'lot', 'log', 'cog']
+    print(solution(begin, target, words))
