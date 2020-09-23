@@ -258,7 +258,21 @@ def solution_42840(answers):
 
     return [i+1 for i,j in enumerate(persons) if j == max_value]
 
+def solution(brown, yellow):
+    """
+    프로그래머스 : 카펫
+    Θ(n)
+    완전 탐색
+    """
+    answer = []
+    n = int((brown - 4) / 2)
+    for i in range(1,n//2+1):
+        width = n - i
+        height = i
+        if width * height == yellow:
+            return [width+2, height+2]
+    return answer
+
 
 if __name__ == '__main__':
-    answers = [1,2,3,4,5,1,2,4,2,3]
-    print(solution(answers))
+    print(solution(10, 2)),
