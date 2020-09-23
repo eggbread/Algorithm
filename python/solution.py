@@ -139,7 +139,7 @@ def solution_43162_2(n, computers):
     return answer
 
 
-def DFS(computers, n, check):
+def DFS_43162(computers, n, check):
     check[n] = True
     for i, x in enumerate(computers[n]):
         if x == 1 and not check[i] and i != n:
@@ -231,9 +231,6 @@ def isPrime(a):
             return False
     return True
 
-
-from itertools import repeat
-
 def solution_42840(answers):
     """
     프로그래머스 : 모의고사
@@ -258,7 +255,7 @@ def solution_42840(answers):
 
     return [i+1 for i,j in enumerate(persons) if j == max_value]
 
-def solution(brown, yellow):
+def solution_(brown, yellow):
     """
     프로그래머스 : 카펫
     Θ(n)
@@ -273,6 +270,108 @@ def solution(brown, yellow):
             return [width+2, height+2]
     return answer
 
+def solution_184169(n):
+    """
+    프로그래머스 : 멀리뛰기
+    Matrix Fibonacci
+    """
+    x = pow(n)
+    return x[0] % 1234567
+
+def pow(n):
+    if n < 2:
+        return [1, 1, 1, 0]
+    if n % 2:#odd
+        x = pow((n-1)/2)
+        return mul(mul(x,x),[1,1,1,0])
+    else:#even
+        x = pow(n/2)
+        return mul(x,x)
+
+def mul(A,B):
+    return [A[0]*B[0]+A[1]*B[2], A[0]*B[1]+A[1]*B[3], A[2]*B[0]+A[3]*B[2], A[2]*B[1]+A[3]*B[3]]
+
+def Queue(n):
+    """
+    프로그래머스 : 멀리뛰기
+    Queue를 이용한 BFS
+    """
+    queue = [n]
+    answer = 0
+    while queue:
+        item = queue.pop(0)
+        if item == 1:
+            answer += 1
+        elif item == 2:
+            answer += 2
+        else:
+            queue.append(item - 1)
+            queue.append(item - 2)
+    return answer
+
+def DFS(n):
+    """
+    프로그래머스 : 멀리뛰기
+    재귀를 이용한 DFS
+    """
+    result = 0
+    if n > 0:
+        if n == 2:
+            return 2
+        if n == 1:
+            return 1
+        result += DFS(n-1)
+        result += DFS(n-2)
+    return result
+
+
+from collections import defaultdict
+
+
+def solution_49191(n, results):
+    """
+    프로그래머스 : 순위
+    """
+    answer = 0
+    wins = defaultdict(set)
+    loses = defaultdict(set)
+
+    for a, b in results:
+        wins[a].add(b)
+        loses[b].add(a)
+
+    for i in range(1, n + 1):
+        for loser in wins[i]:
+            loses[loser] |= loses[i]
+        for winner in loses[i]:
+            wins[winner] |= wins[i]
+
+    for i in range(1, n + 1):
+        if len(wins[i]) + len(loses[i]) == n - 1:
+            answer += 1
+
+    return answer
+
+import heapq
+def solution(scoville, K):
+    """
+    프로그래머스 : 더 맵게
+    Θ(n^2)
+    minheap을 이용한 탐색
+    """
+    answer = 0
+    heapq.heapify(scoville)
+    while scoville[0] < K:
+        if len(scoville) < 2:
+            return -1
+        answer += 1
+        one = heapq.heappop(scoville)
+        two = heapq.heappop(scoville)
+        heapq.heappush(scoville,one + two * 2)
+    return answer
+
 
 if __name__ == '__main__':
-    print(solution(10, 2)),
+    scoville = [1, 2]
+    K = 7
+    print(solution(scoville, K))
