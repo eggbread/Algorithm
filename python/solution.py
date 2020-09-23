@@ -168,6 +168,7 @@ def solution_43165(numbers, target):
 
     return stack.count(0)
 
+
 def solution_43163(begin, target, words):
     """
     프로그래머스 : 단어 변환
@@ -190,6 +191,7 @@ def solution_43163(begin, target, words):
         answer += 1
     return 0
 
+
 def check_word(A, B):
     cnt = 0
     for i in range(len(A)):
@@ -200,15 +202,18 @@ def check_word(A, B):
     else:
         return False
 
+
 import itertools
-def solution(numbers):
+
+
+def solution_42839(numbers):
     """
     프로그래머스 : 소수 찾기
     O(n^2)
     brute force로 다 돌며 찾기
     """
     answer = 0
-    for i in range(1,len(numbers)+1):
+    for i in range(1, len(numbers) + 1):
         number_list = set(map(''.join, itertools.permutations(list(numbers), i)))
         for item in number_list:
             if item[0] != '0':
@@ -217,14 +222,43 @@ def solution(numbers):
                     answer += 1
     return answer
 
+
 def isPrime(a):
-  if(a<2):
-    return False
-  for i in range(2,a):
-    if(a%i==0):
-      return False
-  return True
+    if (a < 2):
+        return False
+    for i in range(2, a):
+        if (a % i == 0):
+            return False
+    return True
+
+
+from itertools import repeat
+
+def solution_42840(answers):
+    """
+    프로그래머스 : 모의고사
+    Θ(n)
+    완전 탐색
+    """
+    first = [1, 2, 3, 4, 5]
+    second = [2, 1, 2, 3, 2, 4, 2, 5]
+    third = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
+    first_score = 0
+    second_score = 0
+    third_score = 0
+    for i in range(len(answers)):
+        if answers[i] == first[i%5]:
+            first_score += 1
+        if answers[i] == second[i%8]:
+            second_score += 1
+        if answers[i] == third[i%10]:
+            third_score += 1
+    persons = [first_score,second_score,third_score]
+    max_value = max(persons)
+
+    return [i+1 for i,j in enumerate(persons) if j == max_value]
+
 
 if __name__ == '__main__':
-    numbers = "011"
-    print(solution(numbers))
+    answers = [1,2,3,4,5,1,2,4,2,3]
+    print(solution(answers))
