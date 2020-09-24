@@ -353,7 +353,7 @@ def solution_49191(n, results):
     return answer
 
 import heapq
-def solution(scoville, K):
+def solution_42626(scoville, K):
     """
     프로그래머스 : 더 맵게
     Θ(n^2)
@@ -370,8 +370,28 @@ def solution(scoville, K):
         heapq.heappush(scoville,one + two * 2)
     return answer
 
+from collections import deque
+def solution(operations):
+    """
+    프로그래머스 : 이중우선순위큐
+    Θ(n^2)
+    deque를 이용한 정렬 큐
+    """
+    dq = deque()
+    for item in operations:
+        command = item.split()
+        if command[0] == 'I':
+            dq.append(int(command[1]))
+            dq = deque(sorted(dq))
+        if dq and command[0]=='D':
+            if command[1] == '1':
+                dq.pop()
+            if command[1] == '-1':
+                dq.popleft()
+    if dq:
+        return [dq.pop(),dq.popleft()]
+    return [0, 0]
 
 if __name__ == '__main__':
-    scoville = [1, 2]
-    K = 7
-    print(solution(scoville, K))
+    jobs = 	["I -45", "I 653", "D 1", "I -642", "I 45", "I 97", "D 1", "D -1", "I 333"]
+    print(solution(jobs))
