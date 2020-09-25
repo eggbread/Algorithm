@@ -231,6 +231,7 @@ def isPrime(a):
             return False
     return True
 
+
 def solution_42840(answers):
     """
     프로그래머스 : 모의고사
@@ -244,16 +245,17 @@ def solution_42840(answers):
     second_score = 0
     third_score = 0
     for i in range(len(answers)):
-        if answers[i] == first[i%5]:
+        if answers[i] == first[i % 5]:
             first_score += 1
-        if answers[i] == second[i%8]:
+        if answers[i] == second[i % 8]:
             second_score += 1
-        if answers[i] == third[i%10]:
+        if answers[i] == third[i % 10]:
             third_score += 1
-    persons = [first_score,second_score,third_score]
+    persons = [first_score, second_score, third_score]
     max_value = max(persons)
 
-    return [i+1 for i,j in enumerate(persons) if j == max_value]
+    return [i + 1 for i, j in enumerate(persons) if j == max_value]
+
 
 def solution_(brown, yellow):
     """
@@ -263,12 +265,13 @@ def solution_(brown, yellow):
     """
     answer = []
     n = int((brown - 4) / 2)
-    for i in range(1,n//2+1):
+    for i in range(1, n // 2 + 1):
         width = n - i
         height = i
         if width * height == yellow:
-            return [width+2, height+2]
+            return [width + 2, height + 2]
     return answer
+
 
 def solution_184169(n):
     """
@@ -278,18 +281,21 @@ def solution_184169(n):
     x = pow(n)
     return x[0] % 1234567
 
+
 def pow(n):
     if n < 2:
         return [1, 1, 1, 0]
-    if n % 2:#odd
-        x = pow((n-1)/2)
-        return mul(mul(x,x),[1,1,1,0])
-    else:#even
-        x = pow(n/2)
-        return mul(x,x)
+    if n % 2:  # odd
+        x = pow((n - 1) / 2)
+        return mul(mul(x, x), [1, 1, 1, 0])
+    else:  # even
+        x = pow(n / 2)
+        return mul(x, x)
 
-def mul(A,B):
-    return [A[0]*B[0]+A[1]*B[2], A[0]*B[1]+A[1]*B[3], A[2]*B[0]+A[3]*B[2], A[2]*B[1]+A[3]*B[3]]
+
+def mul(A, B):
+    return [A[0] * B[0] + A[1] * B[2], A[0] * B[1] + A[1] * B[3], A[2] * B[0] + A[3] * B[2], A[2] * B[1] + A[3] * B[3]]
+
 
 def Queue(n):
     """
@@ -309,6 +315,7 @@ def Queue(n):
             queue.append(item - 2)
     return answer
 
+
 def DFS(n):
     """
     프로그래머스 : 멀리뛰기
@@ -320,12 +327,11 @@ def DFS(n):
             return 2
         if n == 1:
             return 1
-        result += DFS(n-1)
-        result += DFS(n-2)
+        result += DFS(n - 1)
+        result += DFS(n - 2)
     return result
 
 
-from collections import defaultdict
 
 
 def solution_49191(n, results):
@@ -352,7 +358,10 @@ def solution_49191(n, results):
 
     return answer
 
+
 import heapq
+
+
 def solution_42626(scoville, K):
     """
     프로그래머스 : 더 맵게
@@ -367,11 +376,14 @@ def solution_42626(scoville, K):
         answer += 1
         one = heapq.heappop(scoville)
         two = heapq.heappop(scoville)
-        heapq.heappush(scoville,one + two * 2)
+        heapq.heappush(scoville, one + two * 2)
     return answer
 
+
 from collections import deque
-def solution(operations):
+
+
+def solution_42628(operations):
     """
     프로그래머스 : 이중우선순위큐
     Θ(n^2)
@@ -383,15 +395,54 @@ def solution(operations):
         if command[0] == 'I':
             dq.append(int(command[1]))
             dq = deque(sorted(dq))
-        if dq and command[0]=='D':
+        if dq and command[0] == 'D':
             if command[1] == '1':
                 dq.pop()
             if command[1] == '-1':
                 dq.popleft()
     if dq:
-        return [dq.pop(),dq.popleft()]
+        return [dq.pop(), dq.popleft()]
     return [0, 0]
 
+
+def solution_42584(prices):
+    """
+    프로그래머스 : 주식 가격
+    """
+    answer = [0] * len(prices)
+    stack = [0]
+    for time in range(1,len(prices)):
+        while stack and prices[stack[-1]] > prices[time]:
+            top = stack.pop()
+            answer[top] = time - top
+        stack.append(time)
+    for item in stack:
+        answer[item] = len(prices) - 1 - item
+    return answer
+
+from queue import Queue
+def solution_42586(progresses, speeds):
+    """
+    프로그래머스 : 기능 개발
+    Θ(N)
+    """
+    answer = []
+    day = 0
+    while progresses:
+        speed = speeds.pop(0)
+        task = progresses.pop(0) + day * speed
+        if task < 100:
+            if (100 - task) % speed:
+                day += (100 - task) // speed + 1
+            else:
+                day += (100 - task) // speed
+            answer.append(1)
+        else:
+            answer[-1] += 1
+    return answer
+
 if __name__ == '__main__':
-    jobs = 	["I -45", "I 653", "D 1", "I -642", "I 45", "I 97", "D 1", "D -1", "I 333"]
-    print(solution(jobs))
+    processes = [[93, 30, 55],[95, 90, 99, 99, 80, 99]]
+    speeds = [[1, 30, 5],[1, 1, 1, 1, 1, 1]]
+    for i in zip(processes,speeds):
+        print(solution(i[0],i[1]))
