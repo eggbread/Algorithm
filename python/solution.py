@@ -332,6 +332,7 @@ def DFS(n):
     return result
 
 
+from collections import defaultdict
 
 
 def solution_49191(n, results):
@@ -411,7 +412,7 @@ def solution_42584(prices):
     """
     answer = [0] * len(prices)
     stack = [0]
-    for time in range(1,len(prices)):
+    for time in range(1, len(prices)):
         while stack and prices[stack[-1]] > prices[time]:
             top = stack.pop()
             answer[top] = time - top
@@ -420,7 +421,10 @@ def solution_42584(prices):
         answer[item] = len(prices) - 1 - item
     return answer
 
+
 from queue import Queue
+
+
 def solution_42586(progresses, speeds):
     """
     프로그래머스 : 기능 개발
@@ -441,8 +445,65 @@ def solution_42586(progresses, speeds):
             answer[-1] += 1
     return answer
 
+
+import heapq
+
+
+def solution_12927(n, works):
+    """
+    프로그래머스 : 야근 지수
+    """
+    answer = 0
+    if sum(works) <= n:
+        return 0
+    tasks = []
+    for i in works:
+        heapq.heappush(tasks, (-i, i))
+    for i in range(n):
+        task = heapq.heappop(tasks)
+        heapq.heappush(tasks, (task[0] + 1, task[1] - 1))
+    for i in tasks:
+        answer += i[1] ** 2
+    return answer
+
+
+def solution_43238(n, times):
+    """
+    프로그래머스 : 입국 심사
+    """
+    start = 1
+    end = max(times) * n
+    answer = 0
+    while start <= end:
+        sum_value = 0
+        time = (end + start) // 2
+        for item in times:
+            sum_value += time // item
+        if sum_value >= n:
+            answer = time
+            end = time - 1
+        elif sum_value < n:
+            start = time + 1
+    return answer
+
+
+def solution(triangle):
+    """
+    프로그래머스 : 정수 삼각형
+    :Θ(n^2)
+    DP
+    """
+    for i in range(1, len(triangle)):
+        for j in range(len(triangle[i])):
+            if j == 0:
+                triangle[i][j] += triangle[i - 1][0]
+            elif j == len(triangle[i]) - 1:
+                triangle[i][j] += triangle[i - 1][len(triangle[i - 1]) - 1]
+            else:
+                triangle[i][j] += max(triangle[i-1][j-1], triangle[i-1][j])
+
+    return max(triangle[-1])
+
+
 if __name__ == '__main__':
-    processes = [[93, 30, 55],[95, 90, 99, 99, 80, 99]]
-    speeds = [[1, 30, 5],[1, 1, 1, 1, 1, 1]]
-    for i in zip(processes,speeds):
-        print(solution(i[0],i[1]))
+    print(solution([[7], [3, 8], [8, 1, 0], [2, 7, 4, 4], [4, 5, 2, 6, 5]]))
