@@ -332,13 +332,11 @@ def DFS(n):
     return result
 
 
-from collections import defaultdict
-
-
 def solution_49191(n, results):
     """
     프로그래머스 : 순위
     """
+    from collections import defaultdict
     answer = 0
     wins = defaultdict(set)
     loses = defaultdict(set)
@@ -360,15 +358,13 @@ def solution_49191(n, results):
     return answer
 
 
-import heapq
-
-
 def solution_42626(scoville, K):
     """
     프로그래머스 : 더 맵게
     Θ(n^2)
     minheap을 이용한 탐색
     """
+    import heapq
     answer = 0
     heapq.heapify(scoville)
     while scoville[0] < K:
@@ -381,15 +377,13 @@ def solution_42626(scoville, K):
     return answer
 
 
-from collections import deque
-
-
 def solution_42628(operations):
     """
     프로그래머스 : 이중우선순위큐
     Θ(n^2)
     deque를 이용한 정렬 큐
     """
+    from collections import deque
     dq = deque()
     for item in operations:
         command = item.split()
@@ -422,9 +416,6 @@ def solution_42584(prices):
     return answer
 
 
-from queue import Queue
-
-
 def solution_42586(progresses, speeds):
     """
     프로그래머스 : 기능 개발
@@ -446,13 +437,11 @@ def solution_42586(progresses, speeds):
     return answer
 
 
-import heapq
-
-
 def solution_12927(n, works):
     """
     프로그래머스 : 야근 지수
     """
+    import heapq
     answer = 0
     if sum(works) <= n:
         return 0
@@ -487,7 +476,7 @@ def solution_43238(n, times):
     return answer
 
 
-def solution(triangle):
+def solution_43105(triangle):
     """
     프로그래머스 : 정수 삼각형
     :Θ(n^2)
@@ -505,5 +494,19 @@ def solution(triangle):
     return max(triangle[-1])
 
 
+def solution(arr, divisor):
+    """
+    프로그래머스 : 나누어 떨어지는 숫자 배열
+    Θ(n)
+    """
+    answer = []
+    for item in arr:
+        if item % divisor == 0:
+            answer.append(item)
+    if len(answer) == 0:
+        return [-1]
+    else:
+        return sorted(answer)
+
 if __name__ == '__main__':
-    print(solution([[7], [3, 8], [8, 1, 0], [2, 7, 4, 4], [4, 5, 2, 6, 5]]))
+    print(solution([5, 9, 7, 10],5))
