@@ -489,7 +489,7 @@ def solution_43105(triangle):
             elif j == len(triangle[i]) - 1:
                 triangle[i][j] += triangle[i - 1][len(triangle[i - 1]) - 1]
             else:
-                triangle[i][j] += max(triangle[i-1][j-1], triangle[i-1][j])
+                triangle[i][j] += max(triangle[i - 1][j - 1], triangle[i - 1][j])
 
     return max(triangle[-1])
 
@@ -524,9 +524,42 @@ def solution_12912(a, b):
         else:
             mx = b
             mn = a
-        for i in range(mn, mx+1):
+        for i in range(mn, mx + 1):
             answer += i
     return answer
 
+
+def solution_42862(n, lost, reserve):
+    """
+    프로그래머스 : 체육복
+    Greedy
+    """
+    answer = 0
+    check = [1 if i+1 not in lost else 0 for i in range(n)]
+    for i in reserve:
+        check[i - 1] += 1
+    if check[0] == 0 and check[1] == 2:
+        check[0] = 1
+        check[1] = 1
+    if check[n - 1] == 0 and check[n - 2] == 2:
+        check[n - 1] = 1
+        check[n - 2] = 1
+    for i in range(1, n - 1):
+        if check[i] == 0 and check[i - 1] == 2:
+            check[i] = 1
+            check[i - 1] = 1
+        if check[i] == 0 and check[i + 1] == 2:
+            check[i] = 1
+            check[i + 1] = 1
+    for i in check:
+        if i != 0:
+            answer += 1
+    return answer
+
+
 if __name__ == '__main__':
-    print(solution([5, 9, 7, 10],5))
+    n = [5, 5, 3, 6, 6, 5, 7, 9]
+    lost = [[2, 4], [2, 4], [3], [2, 4, 5, 6], [1, 3, 5], [2, 3, 4], [2, 3, 5, 6], [1, 3, 4, 6, 7, 9]]
+    reserve = [[1, 3, 5], [3], [1], [1, 3, 5], [2, 4, 6], [1, 5], [1, 7], [2, 8]]
+    for item in zip(n, lost, reserve):
+        print(solution(item[0], item[1], item[2]))
