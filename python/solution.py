@@ -494,7 +494,7 @@ def solution_43105(triangle):
     return max(triangle[-1])
 
 
-def solution(arr, divisor):
+def solution_12910(arr, divisor):
     """
     프로그래머스 : 나누어 떨어지는 숫자 배열
     Θ(n)
@@ -507,6 +507,26 @@ def solution(arr, divisor):
         return [-1]
     else:
         return sorted(answer)
+
+
+def solution_12912(a, b):
+    """
+    프로그래머스 : 두 정수 사이의 합
+    Θ(n)
+    """
+    answer = 0
+    if a == b:
+        return a
+    else:
+        if a > b:
+            mx = a
+            mn = b
+        else:
+            mx = b
+            mn = a
+        for i in range(mn, mx+1):
+            answer += i
+    return answer
 
 if __name__ == '__main__':
     print(solution([5, 9, 7, 10],5))
