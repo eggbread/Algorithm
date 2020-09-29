@@ -557,9 +557,17 @@ def solution_42862(n, lost, reserve):
     return answer
 
 
+def solution_42748(array, commands):
+    """
+    프로그래머스 : K번째 수
+    """
+    answer = []
+    for item in commands:
+        arr = array[item[0]-1:item[1]]
+        arr.sort()
+        answer.append(arr[item[2]-1])
+    return answer
+
+
 if __name__ == '__main__':
-    n = [5, 5, 3, 6, 6, 5, 7, 9]
-    lost = [[2, 4], [2, 4], [3], [2, 4, 5, 6], [1, 3, 5], [2, 3, 4], [2, 3, 5, 6], [1, 3, 4, 6, 7, 9]]
-    reserve = [[1, 3, 5], [3], [1], [1, 3, 5], [2, 4, 6], [1, 5], [1, 7], [2, 8]]
-    for item in zip(n, lost, reserve):
-        print(solution(item[0], item[1], item[2]))
+    print(solution())
