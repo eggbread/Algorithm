@@ -569,5 +569,19 @@ def solution_42748(array, commands):
     return answer
 
 
+from queue import PriorityQueue
+def solution_12915(strings, n):
+    """
+    프로그래머스 : 문자열 내 마음대로 정렬하기
+    Θ(lgn)
+    """
+    answer = []
+    Q = PriorityQueue()
+    for item in strings:
+        Q.put((item[n], item))
+    while not Q.empty():
+        answer.append(Q.get()[1])
+    return answer
+
 if __name__ == '__main__':
     print(solution())
