@@ -597,6 +597,12 @@ def solution_12916(s):
             y += 1
     return p == y
 
+def solution_12917(s):
+    """
+    프로그래머스 : 문자열 내림차순으로 배치하기
+    """
+    return ''.join(list(reversed(sorted(s))))
+
 if __name__ == '__main__':
-    test = 'pPoooyY'
+    test = 'Zbcdefg'
     print(solution(test))
