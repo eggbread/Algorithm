@@ -583,5 +583,20 @@ def solution_12915(strings, n):
         answer.append(Q.get()[1])
     return answer
 
+
+def solution_12916(s):
+    """
+    프로그래머스 : 문자열 내 p와 y의 개수
+    """
+    p = 0
+    y = 0
+    for item in s.lower():
+        if item == 'p':
+            p += 1
+        if item == 'y':
+            y += 1
+    return p == y
+
 if __name__ == '__main__':
-    print(solution())
+    test = 'pPoooyY'
+    print(solution(test))
