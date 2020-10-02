@@ -45,6 +45,20 @@ def isPrime(a):
             return False
     return True
 
+"""
+약수 구하기
+"""
+def get_divisor(n):
+    divisor = set()
+    if n == 1:
+        divisor.add(1)
+    for i in range(1, int(n/2)+1):
+        if n % i == 0:
+            divisor.add(i)
+            divisor.add(int(n/i))
+    return divisor
+
+
 if __name__ == '__main__':
-    print(get_prime(20))
+    print(get_divisor(1))
 
