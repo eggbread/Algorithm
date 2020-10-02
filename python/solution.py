@@ -624,6 +624,16 @@ def solution_12921(n):
             num -= set(range(2 * i, n + 1, i))
     return len(num)
 
+def solution_12922(n):
+    """
+    프로그래머스 : 수박수박수박수박수박수?
+    """
+    mok = n // 2
+    if n % 2:
+        return ('수박' * mok)+'수'
+    else:
+        return '수박' * mok
+
 if __name__ == '__main__':
     test = 'Zbcdefg'
     print(solution(5))
