@@ -22,3 +22,29 @@ def mul(A,B):
 def sumMatrix(A,B):
     return [[c + d for c, d in zip(a, b)] for a, b in zip(A,B)]
 
+"""
+에라토스테네스의 체
+"""
+def get_prime(n):
+    num = set(range(2,n+1))
+
+    for i in range(2, n + 1):
+        if i in num:
+            num -= set(range(2 * i, n + 1, i))
+    return num
+
+"""
+소수 찾기 기본 코드
+"""
+
+def isPrime(a):
+    if (a < 2):
+        return False
+    for i in range(2, a):
+        if (a % i == 0):
+            return False
+    return True
+
+if __name__ == '__main__':
+    print(get_prime(20))
+
