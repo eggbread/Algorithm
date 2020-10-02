@@ -634,6 +634,26 @@ def solution_12922(n):
     else:
         return '수박' * mok
 
+
+def solution_12926(s, n):
+    """
+    프로그래머스 : 시저 암호
+    """
+    answer = ''
+    for item in s:
+        if item != ' ':
+            pos = ord(item) + n
+            if item.islower():
+                if pos > 122:
+                    pos = 97 + (pos-123)
+            elif item.isupper():
+                if pos > 90:
+                    pos = 65 + (pos-91)
+            answer += chr(pos)
+        else:
+            answer += ' '
+
+    return answer
 if __name__ == '__main__':
-    test = 'Zbcdefg'
-    print(solution(5))
+    test = 'Zbcd efg '
+    print(solution(test, 1))
