@@ -603,6 +603,15 @@ def solution_12917(s):
     """
     return ''.join(list(reversed(sorted(s))))
 
+
+def solution_12918(s):
+    """
+    프로그래머스 : 문자열 다루기 기본
+    """
+    if len(s) == 4 or len(s) == 6:
+        return s.isdigit()
+    return False
+
 if __name__ == '__main__':
     test = 'Zbcdefg'
     print(solution(test))
