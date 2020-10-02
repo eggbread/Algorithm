@@ -612,6 +612,18 @@ def solution_12918(s):
         return s.isdigit()
     return False
 
+def solution_12921(n):
+    """
+    프로그래머스 : 소수찾기
+    에라토스테네스의 체
+    """
+    num = set(range(2,n+1))
+
+    for i in range(2, n + 1):
+        if i in num:
+            num -= set(range(2 * i, n + 1, i))
+    return len(num)
+
 if __name__ == '__main__':
     test = 'Zbcdefg'
-    print(solution(test))
+    print(solution(5))
