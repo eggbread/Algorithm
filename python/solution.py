@@ -694,6 +694,40 @@ def solution_12932(n):
     for item in reversed(str(n)):
         answer.append(int(item))
     return answer
+
+
+def solution_12933(n):
+    """
+    프로그래머스 : 정수 내림차순으로 배치하기
+    """
+    answer = ''
+    li = list(str(n))
+    li.sort(reverse=True)
+    return int("".join(li))
+
+
+def solution_12934(n):
+    """
+    프로그래머스 : 정수 제곱근 판별
+    """
+    import math
+    answer = math.sqrt(n)
+    if answer % 1 == 0:
+        return int(math.pow(answer+1, 2))
+    else:
+        return -1
+
+
+def solution_12935(arr):
+    """
+    제일 작은 수 제거하기
+    """
+    min_idx = arr.index(min(arr))
+    if len(arr) == 1:
+        return [-1]
+    else:
+        del arr[min_idx]
+        return arr
 if __name__ == '__main__':
     test_str = 'Zbcd  efg '
     test = 12
