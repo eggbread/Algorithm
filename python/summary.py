@@ -59,6 +59,29 @@ def get_divisor(n):
     return divisor
 
 
+"""
+최소(댓)값 위치 찾기
+"""
+def find_max_idx(arr):
+    import sys
+    idx = 0
+    max_value = - sys.maxsize - 1
+    for i in range(len(arr)):
+        if arr[i] > max_value:
+            max_value = arr[i]
+            idx = i
+    return max_value, idx
+
+def find_min_idx(arr):
+    import sys
+    idx = 0
+    min_value = sys.maxsize
+    for i in range(len(arr)):
+        if arr[i] < min_value:
+            min_value = arr[i]
+            idx = i
+    return min_value, idx
+
 if __name__ == '__main__':
     print(get_divisor(1))
 
