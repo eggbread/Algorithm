@@ -674,6 +674,16 @@ def solution_12930(s):
                 answer += item.upper()
                 flag = True
     return answer
+
+
+def solution_12931(n):
+    """
+    프로그래머스 : 자릿수 더하기
+    """
+    answer = 0
+    for item in str(n):
+        answer += int(item)
+    return answer
 if __name__ == '__main__':
     test = 'Zbcd  efg '
     print(solution(test))
