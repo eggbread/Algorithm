@@ -654,6 +654,26 @@ def solution_12926(s, n):
             answer += ' '
 
     return answer
+
+
+def solution_12930(s):
+    """
+    프로그래머스 : 이상한 문자 만들기
+    """
+    answer = ''
+    flag = False
+    for item in s:
+        if item == ' ':
+            answer += ' '
+            flag = False
+        else:
+            if flag:
+                answer += item.lower()
+                flag = False
+            else:
+                answer += item.upper()
+                flag = True
+    return answer
 if __name__ == '__main__':
-    test = 'Zbcd efg '
-    print(solution(test, 1))
+    test = 'Zbcd  efg '
+    print(solution(test))
