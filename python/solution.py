@@ -688,7 +688,7 @@ def solution_12931(n):
 
 def solution_12932(n):
     """
-    프로그래머스 : 자연수 뒤집어 배열로 만들기    
+    프로그래머스 : 자연수 뒤집어 배열로 만들기
     """
     answer = []
     for item in reversed(str(n)):
@@ -696,5 +696,5 @@ def solution_12932(n):
     return answer
 if __name__ == '__main__':
     test_str = 'Zbcd  efg '
-    test = 12345
+    test = 118372
     print(solution(test))
