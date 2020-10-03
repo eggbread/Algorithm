@@ -684,6 +684,17 @@ def solution_12931(n):
     for item in str(n):
         answer += int(item)
     return answer
+
+
+def solution_12932(n):
+    """
+    프로그래머스 : 자연수 뒤집어 배열로 만들기    
+    """
+    answer = []
+    for item in reversed(str(n)):
+        answer.append(int(item))
+    return answer
 if __name__ == '__main__':
-    test = 'Zbcd  efg '
+    test_str = 'Zbcd  efg '
+    test = 12345
     print(solution(test))
