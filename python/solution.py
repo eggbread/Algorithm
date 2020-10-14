@@ -735,7 +735,7 @@ def solution_12935(arr):
         return arr
 
 
-def solution(numbers, hand):
+def solution_67256(numbers, hand):
     """
     프로그래머스 : 키패드 누르기
     Θ(n)
@@ -776,7 +776,24 @@ def solution(numbers, hand):
     return answer
 
 
+def solution_12940(n, m):
+    """
+    프로그래머스 : 최대공약수와 최소공배수
+    Θ(n)
+    수학 구현
+    최소공배수는 n * m을 최대공약수로 나눈 값이다.
+    최대공약수는 유클리드 호제법 n과 m의 최대공약수는 m 과 n을 m으로 나눈 나머지와의 최대공약수와 같다.
+    """
+    answer = gcd(n,m)
+    return [answer,n*m/answer]
+
+def gcd(a, b):
+    if a < b:
+        (a, b) = (b, a)
+    while b != 0:
+        (a, b) = (b, a % b)
+    return a
+
+
 if __name__ == '__main__':
-    test = [7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2]
-    hand = 'left'
     print(solution(test, hand))
