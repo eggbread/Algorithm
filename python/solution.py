@@ -535,7 +535,7 @@ def solution_42862(n, lost, reserve):
     Greedy
     """
     answer = 0
-    check = [1 if i+1 not in lost else 0 for i in range(n)]
+    check = [1 if i + 1 not in lost else 0 for i in range(n)]
     for i in reserve:
         check[i - 1] += 1
     if check[0] == 0 and check[1] == 2:
@@ -563,13 +563,15 @@ def solution_42748(array, commands):
     """
     answer = []
     for item in commands:
-        arr = array[item[0]-1:item[1]]
+        arr = array[item[0] - 1:item[1]]
         arr.sort()
-        answer.append(arr[item[2]-1])
+        answer.append(arr[item[2] - 1])
     return answer
 
 
 from queue import PriorityQueue
+
+
 def solution_12915(strings, n):
     """
     프로그래머스 : 문자열 내 마음대로 정렬하기
@@ -597,6 +599,7 @@ def solution_12916(s):
             y += 1
     return p == y
 
+
 def solution_12917(s):
     """
     프로그래머스 : 문자열 내림차순으로 배치하기
@@ -612,17 +615,19 @@ def solution_12918(s):
         return s.isdigit()
     return False
 
+
 def solution_12921(n):
     """
     프로그래머스 : 소수찾기
     에라토스테네스의 체
     """
-    num = set(range(2,n+1))
+    num = set(range(2, n + 1))
 
     for i in range(2, n + 1):
         if i in num:
             num -= set(range(2 * i, n + 1, i))
     return len(num)
+
 
 def solution_12922(n):
     """
@@ -630,7 +635,7 @@ def solution_12922(n):
     """
     mok = n // 2
     if n % 2:
-        return ('수박' * mok)+'수'
+        return ('수박' * mok) + '수'
     else:
         return '수박' * mok
 
@@ -645,10 +650,10 @@ def solution_12926(s, n):
             pos = ord(item) + n
             if item.islower():
                 if pos > 122:
-                    pos = 97 + (pos-123)
+                    pos = 97 + (pos - 123)
             elif item.isupper():
                 if pos > 90:
-                    pos = 65 + (pos-91)
+                    pos = 65 + (pos - 91)
             answer += chr(pos)
         else:
             answer += ' '
@@ -713,7 +718,7 @@ def solution_12934(n):
     import math
     answer = math.sqrt(n)
     if answer % 1 == 0:
-        return int(math.pow(answer+1, 2))
+        return int(math.pow(answer + 1, 2))
     else:
         return -1
 
@@ -728,7 +733,50 @@ def solution_12935(arr):
     else:
         del arr[min_idx]
         return arr
+
+
+def solution(numbers, hand):
+    """
+    프로그래머스 : 키패드 누르기
+    Θ(n)
+    구현
+    """
+    answer = ''
+    l_hand = 12
+    r_hand = 10
+    get_position = lambda x: [(x - 1) // 3, (x - 1) % 3]
+    minus = lambda x, y: abs(x[0] - y[0]) + abs(x[1] - y[1])
+    for num in numbers:
+        if num == 0:
+            num = 11
+        num_position = get_position(num)
+        if num_position[1] == 0:
+            answer += 'L'
+            l_hand = num
+        elif num_position[1] == 2:
+            answer += 'R'
+            r_hand = num
+        else:
+            l_position = minus(get_position(l_hand), num_position)
+            r_position = minus(get_position(r_hand), num_position)
+            if l_position == r_position:
+                if hand == 'left':
+                    answer += 'L'
+                    l_hand = num
+                else:
+                    answer += 'R'
+                    r_hand = num
+            else:
+                if l_position > r_position:
+                    answer += 'R'
+                    r_hand = num
+                else:
+                    answer += 'L'
+                    l_hand = num
+    return answer
+
+
 if __name__ == '__main__':
-    test_str = 'Zbcd  efg '
-    test = 12
-    print(solution(test))
+    test = [7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2]
+    hand = 'left'
+    print(solution(test, hand))
