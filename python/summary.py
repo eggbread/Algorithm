@@ -82,6 +82,15 @@ def find_min_idx(arr):
             idx = i
     return min_value, idx
 
+"""
+N진수로 만들기
+"""
+NOTATION = '0123456789ABCDEF'
+def change(N,K):
+    q, r = divmod(N, K)
+    n = NOTATION[r]
+    return change(q, K) + n if q else n
+
 if __name__ == '__main__':
     print(get_divisor(1))
 
