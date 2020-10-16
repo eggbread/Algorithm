@@ -810,5 +810,12 @@ def solution_12943(num):
             num //= 2
     return answer
 
+def solution_12947(x):
+    """
+    프로그래머스 : 하샤드 수
+    Θ(n)
+    """
+    return False if x % sum(map(int,str(x))) else True
+
 if __name__ == '__main__':
     print(solution(test, hand))
