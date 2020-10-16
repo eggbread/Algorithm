@@ -795,5 +795,20 @@ def gcd(a, b):
     return a
 
 
+def solution_12943(num):
+    """
+    프로그래머스 : 콜라츠 추측
+    Θ(n)
+    수학 구현
+    """
+    answer = 0
+    while num != 1:
+        answer += 1
+        if num % 2:
+            num = num * 3 + 1
+        else:
+            num //= 2
+    return answer
+
 if __name__ == '__main__':
     print(solution(test, hand))
