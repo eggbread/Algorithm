@@ -124,6 +124,11 @@ def gcd(a, b):
         (a, b) = (b, a % b)
     return a
 
+"""
+숫자의 자리수 합
+"""
+def sum_digit(x):
+    return sum(map(int,str(x)))
 
 if __name__ == '__main__':
     print(gcd(16,24))
