@@ -817,5 +817,13 @@ def solution_12947(x):
     """
     return False if x % sum(map(int,str(x))) else True
 
+def solution_12950(arr1, arr2):
+    answer = []
+    for i in range(len(arr1)):
+        answer.append([])
+        for j in range(len(arr1[0])):
+            answer[i].append(arr1[i][j]+arr2[i][j])
+    return answer
+
 if __name__ == '__main__':
-    print(solution(test, hand))
+    print(solution([[1],[2]], [[3],[4]]))
