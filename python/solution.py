@@ -784,8 +784,9 @@ def solution_12940(n, m):
     최소공배수는 n * m을 최대공약수로 나눈 값이다.
     최대공약수는 유클리드 호제법 n과 m의 최대공약수는 m 과 n을 m으로 나눈 나머지와의 최대공약수와 같다.
     """
-    answer = gcd(n,m)
-    return [answer,n*m/answer]
+    answer = gcd(n, m)
+    return [answer, n * m / answer]
+
 
 def gcd(a, b):
     if a < b:
@@ -810,54 +811,48 @@ def solution_12943(num):
             num //= 2
     return answer
 
+
 def solution_12947(x):
     """
     프로그래머스 : 하샤드 수
     Θ(n)
     """
-    return False if x % sum(map(int,str(x))) else True
+    return False if x % sum(map(int, str(x))) else True
+
 
 def solution_12950(arr1, arr2):
     answer = []
     for i in range(len(arr1)):
         answer.append([])
         for j in range(len(arr1[0])):
-            answer[i].append(arr1[i][j]+arr2[i][j])
+            answer[i].append(arr1[i][j] + arr2[i][j])
     return answer
 
-def solution(edges, len_vertex):
-    stack = [edges[0]]
-    check = [False] * len_vertex
-    answer = 0
-    for i in len_vertex:
-        if not check[i]:
-            answer += 1
-            stack = [edges[0]]
-            while stack:
-                item = stack.pop()
-                if not check[item[0]-1]:
-                    check[item[0]-1] = True
-                    for i in edges:
-                        if i[0] == item[1] and not check[i[1]-1]:
-                            stack.append(i)
-
-                if not check[item[1] - 1]:
-                    check[item[1] - 1] = True
-                    for i in edges:
-                        if i[0] == item[1] and not check[i[1] - 1]:
-                            stack.append(i)
-    return answer
 
 def solution_12954(x, n):
-    step = x*n+1 if x>=0 else x*n-1
-    if x==0:
-        return [0]*n
-    return list(range(x,step,x))
+    step = x * n + 1 if x >= 0 else x * n - 1
+    if x == 0:
+        return [0] * n
+    return list(range(x, step, x))
+
+
+def solution_17681(n, arr1, arr2):
+    answer = []
+    for x, y in zip(arr1, arr2):
+        temp = x | y
+        result = ''
+        for i in format(temp, 'b').rjust(n,'0'):
+            if i == '0':
+                result += ' '
+            else:
+                result += '#'
+        answer.append(result)
+
+    return answer
+
 
 if __name__ == '__main__':
-    len_vertex, len_edge = input().split()
-    edges = []
-    for i in range(int(len_edge)):
-        s, e = input().split()
-        edges.append(list(map(int,[s,e])))
-    print(solution(edges, int(len_vertex)))
+    n = 6
+    arr1 = [46, 33, 33 ,22, 31, 50]
+    arr2 = [27 ,56, 19, 14, 14, 10]
+    print(solution(n,arr1,arr2))
