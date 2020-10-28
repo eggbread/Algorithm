@@ -825,5 +825,39 @@ def solution_12950(arr1, arr2):
             answer[i].append(arr1[i][j]+arr2[i][j])
     return answer
 
+def solution(edges, len_vertex):
+    stack = [edges[0]]
+    check = [False] * len_vertex
+    answer = 0
+    for i in len_vertex:
+        if not check[i]:
+            answer += 1
+            stack = [edges[0]]
+            while stack:
+                item = stack.pop()
+                if not check[item[0]-1]:
+                    check[item[0]-1] = True
+                    for i in edges:
+                        if i[0] == item[1] and not check[i[1]-1]:
+                            stack.append(i)
+
+                if not check[item[1] - 1]:
+                    check[item[1] - 1] = True
+                    for i in edges:
+                        if i[0] == item[1] and not check[i[1] - 1]:
+                            stack.append(i)
+    return answer
+
+def solution_12954(x, n):
+    step = x*n+1 if x>=0 else x*n-1
+    if x==0:
+        return [0]*n
+    return list(range(x,step,x))
+
 if __name__ == '__main__':
-    print(solution([[1],[2]], [[3],[4]]))
+    len_vertex, len_edge = input().split()
+    edges = []
+    for i in range(int(len_edge)):
+        s, e = input().split()
+        edges.append(list(map(int,[s,e])))
+    print(solution(edges, int(len_vertex)))
