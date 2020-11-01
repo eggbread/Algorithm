@@ -889,8 +889,32 @@ def gcd_62048(a, b):
     while b != 0:
         (a, b) = (b, a % b)
     return a
+import queue
+def solution_42583(bridge_length, weight, truck_weights):
+    """
+    프로그래머스 : 다리를 지나는 트럭
+    Queue를 이용한 풀이
+    """
+    Q = queue.Queue(maxsize=bridge_length)
+    for _ in range(1,bridge_length):
+        Q.put(0)
+    W = 0
+    time = 1
+    while not Q.empty():
+        if truck_weights:
+            peek = truck_weights[0]
+            if W + peek <= weight:
+                item = truck_weights.pop(0)
+                Q.put(item)
+                W += item
+            else:
+                Q.put(0)
+        W -= Q.get()
+        time += 1
+    return time
 
 if __name__ == '__main__':
-    n = ['1S2D*3T', '1D2S#10S', '1D2S0T', '1S*2T*3S', '1D#2S*3S', '1T2D3D#', '1D2S3T*']
-    for i in n:
-        print(solution(i))
+    bridge_length = 100
+    weight = 100
+    truck_weight = [10,10,10,10,10,10,10,10,10,10]
+    print(solution(bridge_length,weight,truck_weight))
