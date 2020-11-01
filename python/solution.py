@@ -875,6 +875,21 @@ def solution_17682(dartResult):
     return sum(score)
 
 
+def solution_62048(w,h):
+    """
+    프로그래머스 : 멀쩡한 사각형
+    최대공약수를 이용한 계산
+    """
+    g = gcd(w, h)
+    return w*h - g*(w//g+h//g-1)
+
+def gcd_62048(a, b):
+    if a < b:
+        (a, b) = (b, a)
+    while b != 0:
+        (a, b) = (b, a % b)
+    return a
+
 if __name__ == '__main__':
     n = ['1S2D*3T', '1D2S#10S', '1D2S0T', '1S*2T*3S', '1D#2S*3S', '1T2D3D#', '1D2S3T*']
     for i in n:
