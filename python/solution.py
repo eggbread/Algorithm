@@ -841,7 +841,7 @@ def solution_17681(n, arr1, arr2):
     for x, y in zip(arr1, arr2):
         temp = x | y
         result = ''
-        for i in format(temp, 'b').rjust(n,'0'):
+        for i in format(temp, 'b').rjust(n, '0'):
             if i == '0':
                 result += ' '
             else:
@@ -851,8 +851,31 @@ def solution_17681(n, arr1, arr2):
     return answer
 
 
+def solution_17682(dartResult):
+    """
+    프로그래머스 : 다트 게임
+    """
+    score = []
+    bonus = {'S': 1, 'D': 2, 'T': 3}
+    store = ''
+    idx = 0
+    for i in dartResult:
+        if i in bonus:
+            score.append(int(store) ** bonus[i])
+            idx += 1
+            store = ''
+        elif i == '*':
+            if idx != 1:
+                score[idx - 2] *= 2
+            score[idx - 1] *= 2
+        elif i == '#':
+            score[idx - 1] *= -1
+        else:
+            store += i
+    return sum(score)
+
+
 if __name__ == '__main__':
-    n = 6
-    arr1 = [46, 33, 33 ,22, 31, 50]
-    arr2 = [27 ,56, 19, 14, 14, 10]
-    print(solution(n,arr1,arr2))
+    n = ['1S2D*3T', '1D2S#10S', '1D2S0T', '1S*2T*3S', '1D#2S*3S', '1T2D3D#', '1D2S3T*']
+    for i in n:
+        print(solution(i))
