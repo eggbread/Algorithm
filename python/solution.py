@@ -913,8 +913,15 @@ def solution_42583(bridge_length, weight, truck_weights):
         time += 1
     return time
 
+def solution_42577(phone_book):
+    for i in range(len(phone_book)):
+        for j in range(i+1, len(phone_book)):
+            if phone_book[i].startswith(phone_book[j][:len(phone_book[i])]):
+                return False
+    return True
+
 if __name__ == '__main__':
     bridge_length = 100
     weight = 100
     truck_weight = [10,10,10,10,10,10,10,10,10,10]
-    print(solution(bridge_length,weight,truck_weight))
+    print(solution(["1"," 119"]))
