@@ -31,6 +31,11 @@ def mul(A, B):
 def sumMatrix(A, B):
     return [[c + d for c, d in zip(a, b)] for a, b in zip(A, B)]
 
+"""
+행렬 곱셈
+"""
+def mulMatrix(A, B):
+    return [[sum(a*b for a, b in zip(A_row,B_col)) for B_col in zip(*B)] for A_row in A]
 
 """
 에라토스테네스의 체
@@ -89,7 +94,7 @@ def find_max_idx(arr):
         if arr[i] > max_value:
             max_value = arr[i]
             idx = i
-    return max_value, idx
+    return idx, max_value
 
 
 def find_min_idx(arr):
@@ -100,7 +105,7 @@ def find_min_idx(arr):
         if arr[i] < min_value:
             min_value = arr[i]
             idx = i
-    return min_value, idx
+    return idx, max_value
 
 
 """
@@ -114,6 +119,9 @@ def change(N, K):
     n = NOTATION[r]
     return change(q, K) + n if q else n
 
+def change_binary(N):
+    q, r = divmod(N, 2)
+    return change_binary(q) + str(r) if q else str(r)
 """
 최대공약수
 """
@@ -125,10 +133,24 @@ def gcd(a, b):
     return a
 
 """
+최대공배수
+"""
+def lcm(a, b):
+    return a * b // gcd(a,b)
+
+"""
 숫자의 자리수 합
 """
 def sum_digit(x):
     return sum(map(int,str(x)))
+
+"""
+list 내 최댓값의 index
+"""
+def get_max_index(x):
+    import operator
+    index, value = max(enumerate(x), key=operator.itemgetter(1))
+    return index, value
 
 if __name__ == '__main__':
     print(gcd(16,24))

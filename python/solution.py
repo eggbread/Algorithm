@@ -920,8 +920,28 @@ def solution_42577(phone_book):
                 return False
     return True
 
+def solution_11(s):
+    cnt = s.count("0")
+    steps = 0
+    cnt_zero = 0
+    while s != "1":
+        length = len(s) - cnt
+        s = change(length)
+        cnt_zero += cnt
+        cnt = s.count("0")
+        steps += 1
+    return [steps, cnt_zero]
+
+def change(N):
+    q, r = divmod(N, 2)
+    return change(q) + str(r) if q else str(r)
+
+def solution():
+    N = int(input())
+    number_list = list(map(int, input().split(" ")))
+    head = 0
+    tail = 0
+
 if __name__ == '__main__':
-    bridge_length = 100
-    weight = 100
-    truck_weight = [10,10,10,10,10,10,10,10,10,10]
-    print(solution(["1"," 119"]))
+    s = "1111111"
+    print(solution())
